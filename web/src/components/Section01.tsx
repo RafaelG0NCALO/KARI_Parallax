@@ -1,6 +1,6 @@
 // Componente Section02.tsx
 import { Snowflake, Triangle } from "phosphor-react";
-import React from "react";
+import React, { useEffect } from "react";
 import bear from "../assets/bear3.png";
 import clouds from "../assets/clouds.svg";
 import montains from "../assets/montains.svg";
@@ -12,6 +12,25 @@ interface Section01Props {
 }
 
 const Section01: React.FC<Section01Props> = ({ cloudsRef, mountainsRef, textRef }) => {
+  useEffect(() => {
+    const preloadImages = async () => {
+      await Promise.all([
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = clouds;
+          img.onload = resolve;
+        }),
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = montains;
+          img.onload = resolve;
+        }),
+      ]);
+    };
+
+    preloadImages();
+  }, []);
+
   return (
     <div>
       <div className="content">
@@ -19,8 +38,8 @@ const Section01: React.FC<Section01Props> = ({ cloudsRef, mountainsRef, textRef 
           <div ref={textRef} className="box">
             <h1>KARI<Snowflake size={32} /></h1>
             <p>
-              Join us for a week of kiking team-bonding and digital detoxing.
-              This month, ont-time only in kamchatka.
+              Join us for a week of hiking, team-bonding, and digital detoxing.
+              This month, one-time only in Kamchatka.
             </p>
             <button>
               Adventure <Triangle className="triangle" size={15} weight="fill" />

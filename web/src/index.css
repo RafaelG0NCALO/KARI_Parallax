@@ -1,0 +1,535 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Alpha headline pro', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body{
+  background: rgb(16, 2, 54);
+}
+
+.Noscroll::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.main{
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  position: relative; 
+  overflow: hidden;
+}
+
+.main img{
+  position: absolute;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.2 ease;
+}
+
+.main img:nth-child(1){
+  top: 0;
+  right: 0;
+  min-height: 100%;
+}
+
+.main img:nth-child(2){
+  right: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+.main img:nth-child(3){
+  bottom: 0;
+  right: 0;
+  height: auto;
+  object-fit: cover;
+}
+
+.content{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.content-title{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 100%;
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.box{
+  width: 100%;
+  padding: 15px;
+  position: absolute;
+}
+
+.content-title .box h1{
+  font-size: clamp(80px, 10vw, 150px);
+  font-weight: 700; 
+  display: flex;
+  align-items: start;
+}
+
+.content-title p{
+  font-size: 22px;
+  font-weight: lighter;
+  max-width: 500px;
+}
+
+.box button{
+  cursor: pointer;
+  margin-top: 25px;
+  height: 60px;
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  outline: none;
+  border: none;
+  letter-spacing: 5px;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box button .triangle{
+  display: block;
+  rotate: 90deg;
+}
+
+.cards{
+  display: flex;
+  align-items: center;
+  height: 650px;
+  overflow-y: hidden;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-bottom: 30px;
+}
+
+.barCard{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 12px;
+  width: 100%;
+}
+
+.cards .card-container{
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: end;
+  gap: 40px;
+  padding: 10px;
+  scroll-snap-align: start;
+  padding: 0 50px;
+}
+
+.card-container .card{
+  background:#463DB2;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  position: relative;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card:hover{
+  height: 100%;
+}
+
+.position{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: white;
+  font-size: 30px;
+  display: flex;
+  gap: 2px;
+  align-items: end;
+}
+
+.position p{
+  font-size: 18px;
+  margin-bottom: 1px;
+  color: rgb(252, 31, 31);
+}
+
+.header-card{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+
+.header-card .btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e43434;
+  height: 40px;
+  width: 100%;
+  max-width: 200px;
+  letter-spacing: 2px;
+  font-size: 18px;
+  margin: 30px auto;
+}
+
+.header-title{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.header-text{
+  color: rgb(213, 213, 213);
+  padding: 0 10px;
+}
+
+.imgCard{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgCard img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carousel{
+  display: flex;
+}
+
+.carousel button{
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.container-header{
+  padding: 20px 40px;
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Adiciona uma transição suave para opacity e transform */
+  transform: translateX(-100%); /* Inicia o elemento fora da tela à esquerda */
+  opacity: 0;
+}
+
+.container-header.show {
+  transform: translateX(0); /* Move o elemento de volta para sua posição original */
+  opacity: 1; /* Torna o elemento visível */
+}
+
+.carousel button .iconLeft{
+  rotate: -90deg;
+}
+.carousel button .iconRight{
+  rotate: 90deg;
+}
+
+.contentsection{
+  width: 100%;
+  background: linear-gradient(to top, #1B1D60, rgb(16, 2, 54));
+}
+
+section{
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: auto;
+}
+
+section h2{
+  writing-mode: vertical-rl;
+  position: absolute;
+  left: -25px;
+  top: 30px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.title{
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 20px 0;
+  border-bottom: 2px solid #282097;
+  position: relative;
+}
+
+.title h1{
+  font-size: clamp(30px, 10vw, 20px);
+  font-weight: 100;
+  width: 100%;
+  max-width: 300px;
+}
+
+.title p{
+  border-top: 2px solid white;
+  max-width: 300px;
+  width: 100%;
+  text-align: end;
+  padding-top: 15px;
+  color: rgb(209, 211, 215);
+}
+
+.title span{
+  color: rgb(199, 3, 3);
+}
+
+.text01{
+  color: rgb(182, 185, 195);
+  width: 100%;
+  max-width: 700px;
+  font-weight: lighter;
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+.card-header{
+  font-size: 40px;
+}
+
+.animation{
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  transform: translateX(85%);
+  height: 420px;
+  display: flex;
+  transition: 0.8s ease-in-out;
+}
+
+.carousel-container.showCarousel {
+  transform: translateX(0%);
+  height: 420px;
+  display: flex;
+}
+
+.carousel-wrapper {
+  display: flex;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 100%;
+}
+
+.aling{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-item {
+  min-width: 100%;
+  scroll-snap-align: start;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  transform: translateX(-50%);
+}
+
+.indicator {
+  width: 15px;
+  height: 15px;
+ background-color: #a2a2a2;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: #eaeaea;
+}
+
+.next{
+  cursor: pointer;
+  font-size: 18px;
+  background: linear-gradient(to right, #e43434 10%, #252289 10%, #252289 100%);
+  border: none;
+  color: white;
+  padding: 10px;
+  max-height: 90px;
+  min-width: 90px;
+}
+
+.next .icon{
+  rotate: -90deg;
+}
+
+.main-carousel{
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: start;
+  padding: 30px 0;
+  background: linear-gradient(to right, transparent 30%, #242275 30%, #242275 100%);
+}
+
+.content-carousel{
+  padding: 50px;
+}
+
+.containerCarousel{
+  display: flex;
+}
+
+.infoCarousel{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  border-left: 5px solid white;
+}
+
+.titleCarousel{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #2E348A;
+  padding: 20px 40px;
+  text-align: start;
+  height: 115px;
+  position: relative;
+}
+
+.titleCarousel h1.active2 {
+  width: 0px;
+  opacity: 1;
+  position: relative;
+  transition: opacity 0.5s ease;
+}
+
+.titleCarousel h1 {
+  position: absolute;
+  opacity: 0;
+  width: 0px;
+  transition: opacity 0.5s ease;
+}
+
+.infoCarousel h3,p{
+  padding: 0 40px;
+  padding-bottom: 8px;
+}
+
+.infoCarousel p{
+  color: #e2e2e2;
+  font-size: 15px;
+}
+
+.infoCarousel .btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e43434;
+  height: 40px;
+  width: 100%;
+  max-width: 200px;
+  letter-spacing: 2px;
+  font-size: 18px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.firstTitle{
+  padding-top: 20px;
+}
+
+.headerCarousel{
+  max-width: 1200px;
+  margin: auto;
+}
+
+.headerCarousel h2{
+  writing-mode: vertical-rl;
+  position: absolute;
+  left: -25px;
+  top: 30px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 2000px) {
+  .main img:nth-child(3){
+    max-width: none;
+    transform: translateY(2%);
+  }
+  .main img:nth-child(2){
+    transform: translateY(-28%);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .cards .card-container{
+    padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .containerCarousel{
+    flex-wrap: wrap;
+  }
+  .main-carousel{
+  background: none;
+  }
+  .infoCarousel{
+    margin: 30px 0;
+    padding: 20px 0;
+    background: #242275 ;
+  }
+  .carousel-container {
+    width: 100%;
+    max-width: none;
+  }
+  .next{
+    position: absolute;
+    z-index: 10;
+    height: 100px;
+  }
+  .content-carousel{
+    padding: 10px;
+  }
+  .infoCarousel h3, p{
+    padding: 10px;
+  }
+}
+
+
+
+

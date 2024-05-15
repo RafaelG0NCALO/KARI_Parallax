@@ -1,0 +1,130 @@
+import { useEffect, useRef, useState } from "react";
+import clouds from "./assets/clouds.svg";
+import montains from "./assets/montains.svg";
+import bear from "./assets/bear3.png";
+import { Triangle } from 'phosphor-react';
+
+export default function App() {
+  const cloudsRef = useRef<HTMLImageElement>(null);
+  const mountainsRef = useRef<HTMLImageElement>(null);
+  const textRef = useRef<HTMLImageElement>(null);
+  const [cardOpacity, setCardOpacity] = useState(1);
+  const [cardsPerContainer, setCardsPerContainer] = useState(3); // Estado para armazenar o número de cartões por container
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const cloudsSpeed = 0.1;
+      const mountainsSpeed = 0.3;
+      const textSpeed = 0.4;
+
+      if (cloudsRef.current) {
+        cloudsRef.current.style.top = `${-scrollY * cloudsSpeed}px`;
+      }
+
+      if (mountainsRef.current) {
+        mountainsRef.current.style.top = `${scrollY * mountainsSpeed}px`;
+      }
+
+      if (textRef.current) {
+        textRef.current.style.right = `${-scrollY * textSpeed}px`;
+      }
+
+      const windowHeight = window.innerHeight;
+      const cardsOffset = document.querySelector('.cards')?.getBoundingClientRect().top || 0;
+      const triggerPoint = windowHeight - cardsOffset * 0.8; 
+      setCardOpacity(Math.max(0, Math.min(1, (scrollY - cardsOffset + triggerPoint) / triggerPoint)));
+    };
+
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 1200) {
+        setCardsPerContainer(3);
+      } else if (screenWidth >= 800) {
+        setCardsPerContainer(2);
+      } else {
+        setCardsPerContainer(1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    handleResize(); // Chama a função de redimensionamento ao montar o componente para garantir a inicialização correta dos cartões
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Criando um array com base no número total de cartões
+  const totalCards = 9;
+  const cardArray = Array.from({ length: totalCards }, (_, index) => index + 1);
+
+  // Dividindo o array em grupos de acordo com o número de cartões por container
+  const groupedCards = cardArray.reduce<number[][]>((acc, _, index) => {
+    const groupIndex = Math.floor(index / cardsPerContainer);
+    if (!acc[groupIndex]) {
+      acc[groupIndex] = [];
+    }
+    acc[groupIndex].push(index);
+    return acc;
+  }, []);
+
+  return (
+    <>
+      <div className="content">
+        <div  className="content-title">
+            <div ref={textRef} className="box">
+              <h1>KARI*</h1>
+              <p>Join us for a week of kiking team-bonding and digital detoxing. This month, ont-time only in kamchatka.</p>
+              <button>Adventure <Triangle className='triangle' size={15} weight="fill" /></button>
+            </div>
+        </div>
+      </div>
+      <div className="main"> 
+        <img ref={cloudsRef} src={clouds} alt=""  />
+        <img ref={mountainsRef} src={montains} alt=""  />
+        <img src={bear} alt="" />
+      </div>
+
+      <div className="contentsection">
+        <section>
+          
+            <div className="title">
+              <h2><span>01</span> / Range of Activities</h2>
+              <div>
+                <h1>Choose your Adventure</h1>
+              </div>
+              <p>
+                <span>01</span> / Range of Activities
+              </p>
+            </div>
+
+            <p className="text01">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla,
+              ut commodo diam libero vitae erat. Aenean faucibus nibh et
+              justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae 
+              risus tristique posuere.
+            </p>
+
+            <div className="cards" style={{ opacity: cardOpacity }}>
+              {/* Mapeando os grupos para criar os containers */}
+              {groupedCards.map((group, index) => (
+                <div key={index} className="card-container">
+                  {/* Mapeando os índices do grupo para criar os cards */}
+                  {group.map((cardIndex) => (
+                    <div key={cardIndex} className="card">Card {cardIndex}</div>
+                  ))}
+                </div>
+              ))}
+            </div>
+        
+        </section>
+      </div>
+    </>
+  );
+}
